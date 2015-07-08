@@ -1,7 +1,7 @@
-#Git基本使用
+# Git基本使用
 
+## 配置用户信息
 
-##配置用户信息
 Git 提供了一个叫做 git config 的工具，专门用来配置或读取相应的工作环境变量。而正是由这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方：
 
 * `/etc/gitconfig` 文件：系统中对所有用户都普遍适用的配置。若使用 `git config` 时用 `--system` 选项，读写的就是这个文件。
@@ -33,6 +33,7 @@ color.interactive=auto
 color.diff=auto
 ...
 ```
+
 ##.gitignore
 
 ```

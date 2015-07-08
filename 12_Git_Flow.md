@@ -1,18 +1,21 @@
-#git 分支策略
-![image](http://ww3.sinaimg.cn/large/7cc829d3gw1en76ivwj9yj20vy16cdmb.jpg)
+# git 分支策略
+
+![image](./images/git_flow.jpg)
 
 将要介绍的这个模型不会比任何一套流程内容多，每个团队成员都必须遵守，这样便于管理软件开发过程。
 
-##既分散又集中
+## 既分散又集中
+
 我们使用的，且与这个分支模型配合的非常好的库，他有一个“真正”的中央仓库。注意，这个库只是被认为是中央仓库(因为Git是一个分布式的版本控制工具，在技术层面没有所谓的中央仓库)。我们将会为这个仓库起名为origin，因为所有的Git用户对这个名字都比较熟悉。
-![image](http://ww3.sinaimg.cn/large/7cc829d3gw1en76iwn8tsj20r20k276x.jpg)
+![image](./images/git_flow1.jpg)
 
 每个开发者从origin拉取和推送代码。除了集中式的推送拉取关系，每个开发者也有可能从别的开发者处拉取代码，形成自己的团队。例如当与两个或者更多的人开发一个大的特性时，或者在将代码推送到origin之前，这种代码管理模式可能有用。在上图中，存在Alice和Bob，Alice和David，Clair 和David三个子团队
 
 技术上而言，这只不过意味着Alice定义了一个远程Git仓库，起名为bob，实际上指向Bob的版本库，反之亦然(Bob定义了一个远程Git仓库，起名为alice，实际上指向Alice的版本库)。
 
 ##主分支
-![image](http://ww1.sinaimg.cn/mw690/7cc829d3gw1en76iyqpgsj20eu0mcq49.jpg)
+
+![image](./images/git_flow2.jpg)
 
 老实说，我们讨论的开发模型受到了当前已存在模型的很大启发。集中式的版本库有两个永久存在的主分支：
 
@@ -29,7 +32,8 @@ origin的master分支每个Git用户都很熟悉。平行的另外一个分支�
 
 因此，每次代码合并到master分支时，它就是一个人为定义的新的发布产品。理论上而言，在这我们应该非常严格，当master分支有新的提交时，我们应该使用Git的钩子脚本执行自动构建命令，然后将软件推送到生产环境的服务器中进行发布。
 
-##辅助性分支
+## 辅助性分支
+
 紧邻master和develop分支，我们的开发模型采用了另外一种辅助性的分支，以帮助团队成员间的并行开发，特性的简单跟踪，产品的发布准备事宜，以及快速的解决线上问题。不同于主分支，这些辅助性分支往往只要有限的生命周期，因为他们最终会被删除。
 
 我们使用的不同类型分支包括:
@@ -42,8 +46,9 @@ origin的master分支每个Git用户都很熟悉。平行的另外一个分支�
 
 从技术角度看，这些分支的特殊性没有更多的含义。只是按照我们的使用方式对这些分支进行了归类。他们依旧是原Git分支的样子。
 
-###特性分支(feature)
-![image](http://ww2.sinaimg.cn/mw690/7cc829d3gw1en76j016fwj207e0judge.jpg)
+### 特性分支(feature)
+
+![image](./images/git_flow_3.jpg)
 
 特性分支可以从develop分支拉取建立，最终必须合并会develop分支。特性分支的命名，除了 master， develop， release-\*，或hotfix-\*以外，可以随便起名。
 
@@ -59,6 +64,7 @@ origin的master分支每个Git用户都很熟悉。平行的另外一个分支�
 $ git checkout -b myfeature develop
 Switched to a new branch "myfeature"
 ```
+
 **在develop分支整合已经开发完成的特性**
 
 开发完成的特性必须合并到develop分支，即添加到即将发布的版本中。
@@ -72,11 +78,11 @@ Updating ea1b82a..05e9557
 $ git branch -d myfeature
 Deleted branch myfeature (was 05e9557).
 $ git push origin develop
-
 ```
+
 --no-ff参数的作用是在合并的时候，会创建一个新的提交对象，即使是fast-forward方式的合并。这就避免了丢失特性分支的历史记录信息以及提交记录信息。比较一下
 
-![image](http://ww3.sinaimg.cn/mw690/7cc829d3gw1en76j123aaj20qk0ni3zy.jpg)
+![image](./images/git_flow_4.jpg)
 
 在右面的例子中，是不可能从Git历史记录中看到一个已经实现了的特性的所有提交对象-除非你去查看所有的日志信息。要想获取整个特性分支信息，在右面的例子中的确是一个头疼的问题，但是如果使用--no-ff参数就没有这个问题。
 
@@ -84,7 +90,8 @@ $ git push origin develop
 
 不幸的是，我还没有找到一种方法使Git默认的merge操作带着--no-ff参数，但的确应该这样。
 
-###发布分支(release)
+### 发布分支(release)
+
 从develop分支去建立release分支，release分支必须合并到develop分支和master分支，release分支名可以这样起名:release-*。
 
 release分支用于支持一个新版本的发布。他们允许在最后时刻进行一些小修小改。甚至允许进行一些小bug的修改，为新版本的发布准要一些元数据(版本号，构建时间等)。通过在release分支完成这些工作，develop分支将会合并这些特性以备下一个大版本的发布。
@@ -128,7 +135,7 @@ $ git tag -a 1.2
 
 这样release分支已经完成工作，tag也已经打了。
 
-*备注:你可以使用-s or -u <key>参数为你的tag设置标签签名。*
+> 备注：你可以使用-s or -u <key>参数为你的tag设置标签签名。
 
 为了保存这些在release分支所做的变更，我们需要将这些变更合并回develop分支。执行如下Git命令:
 
@@ -147,9 +154,10 @@ Merge made by recursive.
 $ git branch -d release-1.2
 Deleted branch release-1.2 (was ff452fe).
 ```
-###补丁修复分支(hotfix)
 
-![image](http://ww3.sinaimg.cn/mw690/7cc829d3gw1en76j1l9k0j20hk0no407.jpg)
+### 补丁修复分支(hotfix)
+
+![image](./images/git_flow_5.jpg)
 
 hotfix分支从master分支建立，必须合并回develop分支和master分支，为hotfix分支可以这样起名:hotfix-*
 
@@ -193,7 +201,8 @@ Merge made by recursive.
 (Summary of changes)
 $ git tag -a 1.2.1
 ```
-*备注:你可以使用-s or -u <key>参数为你的tag设置标签签名。*
+
+> *备注:你可以使用-s or -u <key>参数为你的tag设置标签签名。*
 
 紧接着，在develop分支合并bugfix代码
 
@@ -213,6 +222,8 @@ $ git branch -d hotfix-1.2.1
 Deleted branch hotfix-1.2.1 (was abbe5d6).
 ```
 
-#总结
+## 总结
 
 这个分支模型其实没有什么震撼人心的新东西，这篇文章开始的那个“最大图片”已经证明了他在我们工程项目中的巨大作用。它会形成一种优雅的理想模型，而且很容易理解，该模型也允许团队成员形成一个关于分支和版本发布过程的相同理念。
+
+[进一步学习Git](https://github.com/xirong/my-git)

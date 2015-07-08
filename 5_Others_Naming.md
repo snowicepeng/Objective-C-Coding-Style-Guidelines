@@ -5,7 +5,8 @@
 缩略前缀可用如下例子
 
 - icon
-- btn
+- button
+- item
 - bg
 - line
 - logo
@@ -16,7 +17,8 @@
 
 **参考:**
 
-```
+```objective-c
 UIImage *settingIcon = [UIImage imageNamed:@"icon_common_setting"];
 ```
+
 图片目录中被用于类似目的的图片应归入各自的组中。

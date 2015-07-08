@@ -1,15 +1,16 @@
-#代码结构
+# 代码结构
+
 实现文件中的代码结构，提倡以下约定：
 
 * 用`#pragma mark -`将函数或方法按功能进行分组。
 * dealloc方法放到实现文件的最顶部。
 	> 这样是为了时刻提醒你要记得释放相关资源。
-
 * delgate或协议相关方法放到一般内容之后。
 
-```
+```objective-c
+
 	#pragma mark - Lifecycle
-	
+
 	- (void)dealloc {}
 	- (instancetype)init {}
 	- (void)viewDidLoad {}
@@ -21,35 +22,53 @@
 	- (void)setCustomProperty:(id)value {}
 	- (id)customProperty {}
 	
-	#pragma mark - Protocol conformance
+    #pragma mark - Public Methods
+
+    #pragma mark - Private Methods
+
+    - (BOOL)canLogin {}
+
+    #pragma mark - Actions
+    
+    - (IBAction)loginAction:(id)sender {}
+    - (IBAction)registerAction:(id)sender {}
+
+    #pragma mark - Notifications
+
+    - (void)keyboardWillShow:(NSNotification *)note {}
+    - (void)keyboardWillHide:(NSNotification *)note {}
+
+    #pragma mark - NSCopying
+    
+    - (id)copyWithZone:(NSZone *)zone {}
+    
+    #pragma mark - NSObject
+    
+    - (NSString *)description {}
+
 	#pragma mark - UITextFieldDelegate
+    
 	#pragma mark - UITableViewDataSource
+
 	#pragma mark - UITableViewDelegate
-	
-	#pragma mark - NSCopying
-	
-	- (id)copyWithZone:(NSZone *)zone {}
-	
-	#pragma mark - NSObject
-	
-	- (NSString *)description {}
 ```
 
-#代码排版格式
+# 代码排版格式
+
 ## 点语法
 
 应该 **始终** 使用点语法来访问或者修改属性，访问其他实例时首选括号。
 
 **推荐：**
 
-```
+```objective-c
 view.backgroundColor = [UIColor orangeColor];
 [UIApplication sharedApplication].delegate;
 ```
 
 **反对：**
 
-```
+```objective-c
 [view setBackgroundColor:[UIColor orangeColor]];
 UIApplication.sharedApplication.delegate;
 ```
@@ -61,18 +80,43 @@ UIApplication.sharedApplication.delegate;
 
 **推荐：**
 
-```
+```objective-c
 if (user.isHappy) {
-// Do something
-}
-else {
-// Do something else
+    // Do something
+} else {
+    // Do something else
 }
 ```
-* 方法之间应该正好空一行，这有助于视觉清晰度和代码组织性。在方法中的功能块之间应该使用空白分开，但往往可能应该创建一个新的方法。
+
+* 申明文件中属性在上面，方法在下面，属性和方法之间空一行。（如果方法有注释，注释算方法的一部分，则方法之间空一行）   
+    > 注意各个要素之间的空格与空行
+
+```objective-c
+@interface NYTPerson : NSObject <NSCoding, NSCopying>
+
+@property (copy, nonatomic) NSString *name;
+@property (strong, nonatomic) NSArray *children;
+
+- (instancetype)initWithName:(NSString *)name;
+- (void)sayHello;
+
+/**
+ *  通过名字，返回对应的孩子.
+ *
+ *  @param name 孩子的名字.
+ *
+ *  @return 返回孩子对象，如果没有孩子这个名字，返回nil.
+ */
+- (NYTPerson *)childWithName:(NSString *)name;
+
+@end
+```
+
+* 实现文件中方法之间应该正好空一行，这有助于视觉清晰度和代码组织性。在方法中的功能块之间应该使用空白分开，但往往可能应该创建一个新的方法。
 * `@synthesize` 和 `@dynamic` 在实现中每个都应该占一个新行。
 
 ## 长度
+
 * 每行代码的长度最多不超过100个字符
 * 尝试将单个函数或方法的实现代码控制在30行内
     > 如果某个函数或方法的实现代码过长，可以考量下是否可以将代码拆分成几个小的拥有单一功能的方法。
@@ -96,7 +140,7 @@ else {
 
 **推荐：**
 
-```
+```objective-c
 if (!error) {
     return success;
 }
@@ -104,29 +148,30 @@ if (!error) {
 
 **反对：**
 
-```
+```objective-c
 if (!error)
     return success;
 ```
 
 或
 
-```
+```objective-c
 if (!error) return success;
 ```
+
 ### 三目运算符
 
 三目运算符，? ，只有当它可以增加代码清晰度或整洁时才使用。单一的条件都应该优先考虑使用。多条件时通常使用 if 语句会更易懂，或者重构为实例变量。
 
 **推荐：**
 
-```
+```objective-c
 result = a > b ? x : y;
 ```
 
 **反对：**
 
-```
+```objective-c
 result = a > b ? x = c > d ? c : d : y;
 ```
 
@@ -136,7 +181,7 @@ result = a > b ? x = c > d ? c : d : y;
 
 **推荐：**
 
-```
+```objective-c
 NSError *error;
 if (![self trySomethingWithError:&error]) {
     // 处理错误
@@ -145,13 +190,14 @@ if (![self trySomethingWithError:&error]) {
 
 **反对：**
 
-```
+```objective-c
 NSError *error;
 [self trySomethingWithError:&error];
 if (error) {
     // 处理错误
 }
 ```
+
 一些苹果的 API 在成功的情况下会写一些垃圾值给错误参数（如果非空），所以针对错误变量可能会造成虚假结果（以及接下来的崩溃）。
 
 ## 方法
@@ -160,13 +206,14 @@ if (error) {
 
 **推荐：**
 
-```
+```objective-c
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
-* 实现文件中，方法的左花括号不另起一行，和方法名同行，并且和方法名之间保持1个空格
-	> 此条是为了和XCode6.1模板生成的文件的代码风格保持一致。
 
-```
+* 实现文件中，方法的左花括号不另起一行，和方法名同行，并且和方法名之间保持1个空格
+	> 此条是为了和 Xcode 模板生成的文件的代码风格保持一致。
+
+```objective-c
 //赞成的
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -176,7 +223,6 @@ if (error) {
 //不赞成的
 - (void)didReceiveMemoryWarning
 {
-
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -191,7 +237,7 @@ if (error) {
 
 **推荐：**
 
-```
+```objective-c
 @interface NYTSection: NSObject
 
 @property (nonatomic) NSString *headline;
@@ -201,17 +247,19 @@ if (error) {
 
 **反对：**
 
-```
+```objective-c
 @interface NYTSection : NSObject {
     NSString *headline;
 }
 ```
 
 
-#### 变量限定符
+### 变量限定符
 
 当涉及到[在 ARC 中被引入](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4))变量限定符时，
 限定符 (`__strong`, `__weak`, `__unsafe_unretained`, `__autoreleasing`) 应该位于星号和变量名之间，如：`NSString * __weak text`。
+
+`__block`位于变量前面 `__block NSInteger count;`。
 
 ## block
 
@@ -224,7 +272,7 @@ if (error) {
 - 如果块太长，比如超过 `20` 行，建议把它定义成一个局部变量，然后再使用该变量。
 - 如果块不带参数，`^{` 之间无须空格。如果带有参数，`^(` 之间无须空格，但 `) {` 之间须有一个空格。
 
-```
+```objective-c
 // The entire block fits on one line.
 [operation setCompletionBlock:^{ [self onOperationDone]; }];
 
@@ -238,7 +286,6 @@ dispatch_async(fileIOQueue_, ^{
         ...
     }
 });
-
 
 [[SessionService sharedService]
     loadWindowWithCompletionBlock:^(SessionWindow *window) {
@@ -263,9 +310,9 @@ dispatch_async(fileIOQueue_, ^{
         }
 ];
 
-
 void (^largeBlock)(void) = ^{
     ...
 };
+
 [operationQueue_ addOperationWithBlock:largeBlock];
 ```
