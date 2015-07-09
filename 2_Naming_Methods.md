@@ -13,7 +13,7 @@
   - (void)selectTabViewItem:(NSTableViewItem *)tableViewItem;
   ```
 
-名称中不要出现 do或does，因为这些助动词没什么实际意义。也不要在动词前使用副词或形容词修饰。
+ 名称中不要出现 do或does，因为这些助动词没什么实际意义。也不要在动词前使用副词或形容词修饰。
 
 * 如果方法返回方法接收者的某个属性，直接用属性名称命名。不要使用 get，除非是间接返回一个或多个值。请参考“访问方法”一节。
 
@@ -32,10 +32,10 @@
 
 * 参数前面的单词要能描述该参数。 
 
-|  示例 | 说明  |
-|--|--|
-| `- (id)viewWithTag:(int)aTag;`  | 对 |
-| `- (id)taggedView:(int)aTag;` | 错 |
+  |  示例 | 说明  |
+  |-------|-------|
+  | `- (id)viewWithTag:(int)aTag;`  | 对 |
+  | `- (id)taggedView:(int)aTag;` | 错 |
 
 * 细化基类中的已有方法:创建一个新方法，其名称是在被细化方法名称后面追加参数关键词
 
@@ -51,7 +51,7 @@
   | `- (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;` | 对 |
   | `- (int)runModalForDirectory:(NSString *)path andFile:(NSString *)name andTypes:(NSArray *)fileTypes;` | 错 |
 
-虽然上面的例子中使用 add 看起来也不错，但当你方法有太多参数关键字时就有问题。
+ 虽然上面的例子中使用 add 看起来也不错，但当你方法有太多参数关键字时就有问题。
 
 * 如果方法描述两种独立的行为，使用 and 来串接它们
 
@@ -91,7 +91,7 @@
   - (BOOL)isEditable;
   ```
 
-* 如果属性是用动词描述的，则命名格式为:(动词要用现在时时态) 
+* 如果属性是用动词描述的，则命名格式为：（动词要用现在时时态）
 
   ```
   - (void)setVerbObject:(BOOL)flag;
@@ -115,7 +115,7 @@
   | `- (BOOL)glyphInfoAccepted;` | 错 |
 
 
-* 可以使用情态动词(can， should， will 等)来提高清晰性，但不要使用 do 或 does
+* 可以使用情态动词（can， should， will 等）来提高清晰性，但不要使用 do 或 does
 
   |  示例 | 说明  |
   | ----- | ----- |
@@ -145,7 +145,7 @@
   - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
   ```
 
-* 冒号紧跟在类名之后(随后的那个参数表示委派的对象)。该规则不适用于只有一个 sender 参数的方法
+* 冒号紧跟在类名之后（随后的那个参数表示委派的对象）。该规则不适用于只有一个 sender 参数的方法
 
   ```objective-c
   - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
@@ -201,7 +201,7 @@
 集合方法的实现要考虑如下细节:
 
 * 以上集合类方法通常负责管理元素的所有者关系，在 add 或 insert 的实现代码里会 retain 元素，在 remove 的实现代码中会 release 元素
-* 当被插入的对象需要持有指向集合对象的指针时，通常使用 set... 来命名其设置该指针的方法，且不 要 retain 集合对象。比如上面的 insertLayerManager:atIndex: 这种情形，NSLayoutManager 类使 用如下方法:
+* 当被插入的对象需要持有指向集合对象的指针时，通常使用 set... 来命名其设置该指针的方法，且不 要 retain 集合对象。比如上面的 `insertLayerManager:atIndex:` 这种情形，`NSLayoutManager` 类使用如下方法:
 
   ```objective-c
   - (void)setTextStorage:(NSTextStorage *)textStorage; 
