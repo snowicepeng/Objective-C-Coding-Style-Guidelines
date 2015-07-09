@@ -6,13 +6,13 @@
 
 * 最好是既清晰又简短，但不要为简短而丧失清晰性
 
-|  示例 | 说明  |
-| ----- | ----- |
-| `insertObject: atIndex:` | 好 |
-| `insert: at:` | 不清晰：要插入什么？“at”表示什么？|
-| `removeObjectAtIndex:` | 好 |
-| `removeObject:` | 这样也不错，因为方法是移除作为参数的对象 |
-| `remove:` | 不清晰：要移除什么? |
+    |  示例 | 说明  |
+    | ----- | ----- |
+    | `insertObject: atIndex:` | 好 |
+    | `insert: at:` | 不清晰：要插入什么？“at”表示什么？|
+    | `removeObjectAtIndex:` | 好 |
+    | `removeObject:` | 这样也不错，因为方法是移除作为参数的对象 |
+    | `remove:` | 不清晰：要移除什么? |
 
 * 名称通常不缩写，即使名称很长，也要拼写完全（禁止拼音！！！）
 
