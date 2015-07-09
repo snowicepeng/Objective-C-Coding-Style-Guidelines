@@ -25,7 +25,7 @@
 
 多数情况下，你声明了一个属性，那么就会自动生成对应的实例变量。
 
-确保实例变量名简明扼要地描述了它所代表的属性。通常，你应该使用访问方法，而不是直接访问实例变量（除了在init或者dealloc方法里）。为了便于标识实例变量，在名字前面加个下划线"_"，例如:
+确保实例变量名简明扼要地描述了它所代表的属性。通常，你应该使用访问方法，而不是直接访问实例变量（除了在init或者dealloc方法里）。为了便于标识实例变量，在名字前面加个下划线“_”，例如:
 
 ```objective-c
 @implementation MyClass {
@@ -65,7 +65,7 @@
       NSTitledWindowMask          = 1 << 0，
       NSClosableWindowMask        = 1 << 1，
       NSMiniaturizableWindowMask  = 1 << 2，
-     NSResizableWindowMask       = 1 << 3
+      NSResizableWindowMask       = 1 << 3
   };
   ```
 
@@ -78,7 +78,7 @@
   const float NSLightGray;
   ```
 
-枚举常量命名规则与函数命名规则相同。
+ 枚举常量命名规则与函数命名规则相同。
 
 ### 其他常量
 
@@ -101,7 +101,7 @@
   APPKIT_EXTERN NSString *NSPrintCopies;
   ```
 
-实际的字符串值在实现文件中赋予。(注意: APPKIT_EXTERN 宏等价于 Objective-C 中 extern)
+ 实际的字符串值在实现文件中赋予。(注意: `APPKIT_EXTERN` 宏等价于 Objective-C 中 `extern`)
 
 ## 异常与通知
 
@@ -109,7 +109,7 @@
 
 ### 异常
 
-虽然你可以处于任何目的而使用异常(由 `NSException` 类及相关类实现)，Cocoa 通常不使用异常来处 理常规的，可预料的错误。在这些情形下，使用诸如 nil， NULL， NO 或错误代码之类的返回值。异常的典 型应用类似数组越界之类的编程错误。
+虽然你可以处于任何目的而使用异常(由 `NSException` 类及相关类实现)，Cocoa 通常不使用异常来处理常规的，可预料的错误。在这些情形下，使用诸如 nil， NULL， NO 或错误代码之类的返回值。异常的典型应用类似数组越界之类的编程错误。
 
 异常由具有如下形式的全局 NSString 对象标识:
 
@@ -129,8 +129,8 @@ NSIllegalSelectorException
 
 ### 通知
 
-如果一个类有委托，那它的大部分通知可能由其委托的委托方法来处理。这些通知的名称应该能够反应其 响应的委托方法。比如，当应用程序提交 NSApplicationDidBecomeActiveNotification 通知时，全局 NSApplication 对象的委托会注册从而能够接收 applicaitonDidBecomeActive: 消息。
-通知由具有如下形式的全局 NSString 对象标识:
+如果一个类有委托，那它的大部分通知可能由其委托的委托方法来处理。这些通知的名称应该能够反应其 响应的委托方法。比如，当应用程序提交 `NSApplicationDidBecomeActiveNotification` 通知时，全局 `NSApplication` 对象的委托会注册从而能够接收 `applicaitonDidBecomeActive:` 消息。
+通知由具有如下形式的全局 `NSString` 对象标识:
 
 ```
 [相关联类的名称] + [Did 或 Will] + [UniquePartOfName] + Notification
