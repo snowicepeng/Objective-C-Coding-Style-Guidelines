@@ -182,7 +182,7 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 
   > 向一个nil的Objective-C对象发送消息不会导致崩溃。但由于Objective-C运行时不会处理给NULL指针的情况，所以为了避免崩溃，需要自行处理对于C/C++的NULL指针的检测。
 
-* 如果某个`BOOL`类型的property的名字是一个形容词，建议为getter方法加上一个"is"开头的别名。
+* 如果某个`BOOL`类型的property的名字是一个形容词，建议为getter方法加上一个“is”开头的别名。
 
 	```objective-c
 	@property (assign, getter = isEditable) BOOL editable;
