@@ -17,10 +17,10 @@
 @property (assign) BOOL showsAlpha;
 ```
 
-如果属性是形容词，名字去掉"is"前缀，但是要特别说明一下符合规范的get访问方法，例如
+如果属性是形容词，名字去掉“is”前缀，但是要特别说明一下符合规范的get访问方法，例如
 
 ```objective-c
-@property (assign， getter=isEditable) BOOL editable;
+@property (assign, getter=isEditable) BOOL editable;
 ```
 
 多数情况下，你声明了一个属性，那么就会自动生成对应的实例变量。
@@ -48,35 +48,35 @@
 * 使用枚举来定义一组相关的整数常量
 * 枚举常量与其 typedef 命名遵守函数命名规则。如:来自 `NSMatrix.h` 中的例子
 
-```objective-c
-typedef enum _NSMatrixMode {
-    NSRadioModeMatrix        = 0，
-    NSHighlightModeMatrix    = 1，
-    NSListModeMatrix         = 2，
-    NSTrackModeMatrix        = 3，
-} NSMatrixMode;
-```
+  ```objective-c
+  typedef enum _NSMatrixMode {
+     NSRadioModeMatrix        = 0，
+     NSHighlightModeMatrix    = 1，
+     NSListModeMatrix         = 2，
+     NSTrackModeMatrix        = 3，
+  } NSMatrixMode;
+  ```
 
 * 位掩码常量可以使用不具名枚举。如:
 
-```objective-c
-enum {
-    NSBorderlessWindowMask      = 0，
-    NSTitledWindowMask          = 1 << 0，
-    NSClosableWindowMask        = 1 << 1，
-    NSMiniaturizableWindowMask  = 1 << 2，
-    NSResizableWindowMask       = 1 << 3
-};
-```
+  ```objective-c
+  enum {
+      NSBorderlessWindowMask      = 0，
+      NSTitledWindowMask          = 1 << 0，
+      NSClosableWindowMask        = 1 << 1，
+      NSMiniaturizableWindowMask  = 1 << 2，
+     NSResizableWindowMask       = 1 << 3
+  };
+  ```
 
 ### const常量
 
 * 尽量用const来修饰浮点数常数，以及彼此没有关联的整数常量（否则使用枚举）
 * const常量命名范例：
 
-```objective-c
-const float NSLightGray;
-```
+  ```objective-c
+  const float NSLightGray;
+  ```
 
 枚举常量命名规则与函数命名规则相同。
 
@@ -85,21 +85,21 @@ const float NSLightGray;
 * 通常不使用 #define 来创建常量。如上面所述，整数常量请使用枚举，浮点数常量请使用const
 * 使用大写字母来定义预处理编译宏。如： 
 
-```objective-c
-#ifdef  DEBUG
-```
+  ```objective-c
+  #ifdef  DEBUG
+  ```
 
 * 编译器定义的宏名首尾都有双下划线。 如： 
 
-```objective-c
-__MACH__
-```
+  ```objective-c
+  __MACH__
+  ```
 
 * 为 notification 名及 dictionary key 定义字符串常量，从而能够利用编译器的拼写检查，减少书写错误。Cocoa 框架提供了很多这样的范例:
 
-```objective-c
-APPKIT_EXTERN NSString *NSPrintCopies;
-```
+  ```objective-c
+  APPKIT_EXTERN NSString *NSPrintCopies;
+  ```
 
 实际的字符串值在实现文件中赋予。(注意: APPKIT_EXTERN 宏等价于 Objective-C 中 extern)
 
