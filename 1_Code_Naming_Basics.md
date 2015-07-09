@@ -6,41 +6,41 @@
 
 * 最好是既清晰又简短，但不要为简短而丧失清晰性
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `insertObject: atIndex:` | 好 |
-    | `insert: at:` | 不清晰：要插入什么？“at”表示什么？|
-    | `removeObjectAtIndex:` | 好 |
-    | `removeObject:` | 这样也不错，因为方法是移除作为参数的对象 |
-    | `remove:` | 不清晰：要移除什么? |
+|  示例 | 说明  |
+| ----- | ----- |
+| `insertObject: atIndex:` | 好 |
+| `insert: at:` | 不清晰：要插入什么？“at”表示什么？|
+| `removeObjectAtIndex:` | 好 |
+| `removeObject:` | 这样也不错，因为方法是移除作为参数的对象 |
+| `remove:` | 不清晰：要移除什么? |
 
 * 名称通常不缩写，即使名称很长，也要拼写完全（禁止拼音！！！）
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `destinationSelection:` | 好 |
-    | `destSel:` | 不好|
-    | `setBackgroundColor:` | 好 |
-    | `setBkgdColor:` | 不好 |
+|  示例 | 说明  |
+| ----- | ----- |
+| `destinationSelection:` | 好 |
+| `destSel:` | 不好|
+| `setBackgroundColor:` | 好 |
+| `setBkgdColor:` | 不好 |
 
  你可能会认为某个缩写广为人知，但有可能并非如此，尤其是当你的代码被来自不同文化和语言背景的开发人员所使用时。 然而，你可以使用少数非常常见，历史悠久的缩写。请参考“可接受的缩略名”一节
 
 * 避免使用有歧义的 API 名称，如那些能被理解成多种意思的方法名称
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `sendPort` | 是发送端口还是返回一个发送端口？ |
-    | `displayName` | 是显示一个名称还是返回用户界面中控件的标题？ |
+|  示例 | 说明  |
+| ----- | ----- |
+| `sendPort` | 是发送端口还是返回一个发送端口？ |
+| `displayName` | 是显示一个名称还是返回用户界面中控件的标题？ |
 
 #### 一致性
 
 * 尽可能使用与Cocoa编程接口命名保持一致的名称。如果你不太确定某个命名的一致性，请浏览一下头文件或参考文档中的范例。
 * 在使用多态方法的类中，命名的一致性非常重要，在不同类中实现相同功能的方法应该具有相同的名称。
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `- (int)tag` | 在 `NSView`，`NSCell`，`NSControl` 中有定义 |
-    | `- (void)setStringValue:(NSString *)` | 在许多Cocoa类中有定义 |
+|  示例 | 说明  |
+| ----- | ----- |
+| `- (int)tag` | 在 `NSView`，`NSCell`，`NSControl` 中有定义 |
+| `- (void)setStringValue:(NSString *)` | 在许多Cocoa类中有定义 |
 
 ## 前缀
 
@@ -49,12 +49,12 @@
 * 类名和常量应该始终使用三个字母的前缀（例如 TDR），因为两个字母的前缀是苹果SDK先使用的，但 Core Data 实体名称可以省略。为了代码清晰，常量应该使用相关类的名字作为前缀并使用驼峰命名法。  
     下面是常见的苹果官方的前缀
  
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | NS | Foundation |
-    | NS | Application Kit |
-    | AB | Address Book |
-    | IB | Interface Builder|
+|  示例 | 说明  |
+| ----- | ----- |
+| NS | Foundation |
+| NS | Application Kit |
+| AB | Address Book |
+| IB | Interface Builder|
 
 * 给类、协议、函数（C函数）、常量和 `typedef` 结构体命名时都加上前缀，不要给方法加前缀，因为方法存在于它们的类的命名空间中，同样不要给结构体成员加前缀。
  
@@ -76,10 +76,10 @@
 
 * 大多数协议仅组合一组相关的方法，而不关联任何类，这种协议的命名应该使用动名词(ing)，以不与 类名混淆。
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `NSLocking` | good |
-    | `NSLock` | 糟糕，它看起来像类名 |
+|  示例 | 说明  |
+| ----- | ----- |
+| `NSLocking` | good |
+| `NSLock` | 糟糕，它看起来像类名 |
 
 * 有些协议组合一些彼此无关的方法（这样做是避免创建多个独立的小协议）。这样的协议倾向于与某个类关联在一起，该类是协议的主要体现者。在这种情形，我们约定协议的名称与该类同名。`NSObject`协议就是这样一个例子。这个协议组合一组彼此无关的方法，有用于查询对象在其类层次中位置的方法，有使之能调用特殊方法的方法以及用于增减引用计数的方法。由于 `NSObject` 是这些方法的主要体现者，所以我们用类的名称命名这个协议。
 
@@ -89,22 +89,22 @@
 
 * 声明孤立的类或协议：将孤立的类或协议声明放置在单独的头文件中，该头文件名称与类或协议同名
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `NSApplication.h` | `NSApplication` 类 |
+|  示例 | 说明  |
+| ----- | ----- |
+| `NSApplication.h` | `NSApplication` 类 |
 
 * 声明相关联的类或协议：将相关联的声明（类，类别及协议）放置在一个头文件中，该头文件名称与 主要的类/类别/协议的名字相同。
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `NSString.h` | `NSString` 和 `NSMutableString` 类 |
-    | `NSLock.h` | `NSLocking` 协议和 `NSLock`， `NSConditionLock`， `NSRecursiveLock` 类 |
+|  示例 | 说明  |
+| ----- | ----- |
+| `NSString.h` | `NSString` 和 `NSMutableString` 类 |
+| `NSLock.h` | `NSLocking` 协议和 `NSLock`， `NSConditionLock`， `NSRecursiveLock` 类 |
 
 * 包含框架头文件：每个框架应该包含一个与框架同名的头文件，该头文件包含该框架所有公开的头文件。
 
-    |  示例 | 说明  |
-    | ----- | ----- |
-    | `Foundation.h` | `Foundation.framework` |
+|  示例 | 说明  |
+| ----- | ----- |
+| `Foundation.h` | `Foundation.framework` |
 
 * 为已有框架中的某个类扩展API：如果要在一个框架中声明属于另一个框架某个类的范畴类的方法，该头文件的命名形式为：[原类名]Additions。如 Application Kit 中的 `NSBundleAdditions.h`
 
