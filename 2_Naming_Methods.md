@@ -17,7 +17,7 @@
 
 * 如果方法返回方法接收者的某个属性，直接用属性名称命名。不要使用 get，除非是间接返回一个或多个值。请参考“访问方法”一节。
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   |-------|-------|
   | `- (NSSize)cellSize;` | 对 |
   | `- (NSSize)calcCellSize;` | 错 |
@@ -25,28 +25,28 @@
 
 * 参数要用描述该参数的关键字命名
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   |-------|-------|
   | `- (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;` |对 |
   | `- (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;` | 错 |
 
 * 参数前面的单词要能描述该参数。 
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   |-------|-------|
   | `- (id)viewWithTag:(int)aTag;`  | 对 |
   | `- (id)taggedView:(int)aTag;` | 错 |
 
 * 细化基类中的已有方法:创建一个新方法，其名称是在被细化方法名称后面追加参数关键词
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   |-------|-------|
   |`- (id)initWithFrame:(CGRect)frameRect;` | `NSView`、`UIView` |
   |`- (id)initWithFrame:(NSRect)frameRect mode:(int)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;` | `NSMatrix`， a subclass of `NSView` |
 
 * 不要使用 and 来连接用属性作参数的关键字
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   |------ |-------|
   | `- (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;` | 对 |
   | `- (int)runModalForDirectory:(NSString *)path andFile:(NSString *)name andTypes:(NSArray *)fileTypes;` | 错 |
@@ -55,7 +55,7 @@
 
 * 如果方法描述两种独立的行为，使用 and 来串接它们
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   |-------| ------|
   | `- (BOOL)openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;` | `NSWorkspace` |
 
@@ -107,7 +107,7 @@
 
 * 不要使用动词的过去分词形式作形容词使用
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   | ----- | ----- |
   | `- (void)setAcceptsGlyphInfo:(BOOL)flag;` | 对 |
   | `- (BOOL)acceptsGlyphInfo` | 对 |
@@ -117,7 +117,7 @@
 
 * 可以使用情态动词（can， should， will 等）来提高清晰性，但不要使用 do 或 does
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   | ----- | ----- |
   | `- (void)setCanHide:(BOOL)flag;` | 对 |
   | `- (BOOL)canHide;` | 对 |
@@ -128,7 +128,7 @@
 
 * 只有在方法需要间接返回多个值的情况下，才使用 get
 
-|  示例 | 说明  |
+  |  示例 | 说明  |
   | ----- | ----- |
   | `- (void)getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;` |  `NSBezierPath` |
 
