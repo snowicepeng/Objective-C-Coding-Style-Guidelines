@@ -132,7 +132,7 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 	> 
 	> **因此C或C++中的非0为真并不一定就是YES**
 
-```objective-c
+	```objective-c
 	//以下都是被禁止的
     - (BOOL)isBold {
 		return [self fontTraits] & NSFontBoldTrait;
@@ -162,11 +162,11 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 	if ([self isBold]) {
 		//...
 	}
-```
+	```
 
 * 虽然`nil`会被直接解释成`NO`，但还是建议在条件判断时保持与nil的比较，因为这样代码更直观。
 
-```objective-c
+	```objective-c
 	//比如，更直观的代码
 	if (someObject != nil) {
 		//...
@@ -176,27 +176,28 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 	if (!someObject) {
 		//...
 	}
-```
+	```
 
 * 在C或C++代码中，要注意NULL指针的检测。
-	> 向一个nil的Objective-C对象发送消息不会导致崩溃。但由于Objective-C运行时不会处理给NULL指针的情况，所以为了避免崩溃，需要自行处理对于C/C++的NULL指针的检测。
+
+  > 向一个nil的Objective-C对象发送消息不会导致崩溃。但由于Objective-C运行时不会处理给NULL指针的情况，所以为了避免崩溃，需要自行处理对于C/C++的NULL指针的检测。
 
 * 如果某个`BOOL`类型的property的名字是一个形容词，建议为getter方法加上一个"is"开头的别名。
 
-```objective-c
-@property (assign, getter = isEditable) BOOL editable;
-```
+	```objective-c
+	@property (assign, getter = isEditable) BOOL editable;
+	```
 	
 * 在方法实现中，如果有block参数，要注意检测block参数为nil的情况。
 
-```objective-c
-- (void)exitWithCompletion:(void(^)(void))completion {
-	// 错误。 如果外部调用此方法时completion传入nil，此处会发生EXC_BAD_ACCESS
-	completion();
-	    
-	// 正确。如果completion不存在则不调用。
-	if (completion) {
+	```objective-c
+	- (void)exitWithCompletion:(void(^)(void))completion {
+		// 错误。 如果外部调用此方法时completion传入nil，此处会发生EXC_BAD_ACCESS
 		completion();
+	    
+		// 正确。如果completion不存在则不调用。
+		if (completion) {
+			completion();
+		}
 	}
-}
-```
+	```
