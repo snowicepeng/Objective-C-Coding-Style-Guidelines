@@ -1,12 +1,12 @@
 # 代码注释规范
 
-当需要的时候，注释应该被用来解释 为什么 特定代码做了某些事情。所使用的任何注释必须保持最新，否则就删除掉。
+当需要的时候，注释应该被用来解释为什么特定代码做了某些事情。所使用的任何注释必须保持最新，否则就删除掉。
 
 通常应该避免一大块注释，代码就应该尽量作为自身的文档，只需要隔几行写几句说明。这并不适用于那些用来生成文档的注释。
 
 ## 文件注释
 
-```
+```objective-c
 //
 //  [File Name]
 //  [Project Name]
@@ -28,19 +28,19 @@
 注：对于模块使用 [@import][Import_2] 语法。   
 
 ```objective-c
-	// Frameworks
-	@import QuartzCore;
+// Frameworks
+@import QuartzCore;
 	
-	// Models
-	#import "NYTUser.h"
+// Models
+#import "NYTUser.h"
 	
-	// Views
-	#import "NYTButton.h"
-	#import "NYTUserView.h"
+// Views
+#import "NYTButton.h"
+#import "NYTUserView.h"
 
-  // Controllers
-  #import "NYTTodayViewController.h"
-  #import "NYTHistoryViewController.h"
+// Controllers
+#import "NYTTodayViewController.h"
+#import "NYTHistoryViewController.h"
 ```   
 
 [Import_1]: http://ashfurrow.com/blog/structuring-modern-objective-c
@@ -49,7 +49,7 @@
 ## 方法注释
 
 除非你认为你的方法名取得非常完美，否则你还是需要给方法添加注释。
-注释采用javadoc的格式，可以使用XCode插件VVDocumenter-Xcode快速添加，只需输入`///`即可
+注释采用javadoc的格式，可以使用Xcode插件[VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode)快速添加，只需输入`///`即可
 
 ```objective-c
 /**
@@ -71,7 +71,7 @@
 
 ## 重点注释
 
-Xcode 支持几种类型的重点注释，可以方便在文件导航中查看，分别是：TODO、FIXME、???、!!!。
+Xcode支持几种类型的重点注释，可以方便在文件导航中查看，分别是：TODO、FIXME、???、!!!。
 
 使用格式如下：
   
