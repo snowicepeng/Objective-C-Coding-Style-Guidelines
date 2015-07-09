@@ -8,27 +8,27 @@
 * 小写第一个单词的首字符，大写随后单词的首字符，不使用前缀。请参考“书写约定”一节。有两种例 外情况：1，方法名以广为人知的大写字母缩略词(如 TIFF or PDF)开头；2，私有方法可以使用统一的前缀来分组和辨识，请参考“私有方法”一节
 * 表示对象行为的方法，名称以动词开头:
 
-```objective-c
-- (void)invokeWithTarget:(id)target;
-- (void)selectTabViewItem:(NSTableViewItem *)tableViewItem;
-```
+  ```objective-c
+  - (void)invokeWithTarget:(id)target;
+  - (void)selectTabViewItem:(NSTableViewItem *)tableViewItem;
+  ```
 
 名称中不要出现 do或does，因为这些助动词没什么实际意义。也不要在动词前使用副词或形容词修饰。
 
 * 如果方法返回方法接收者的某个属性，直接用属性名称命名。不要使用 get，除非是间接返回一个或多个值。请参考“访问方法”一节。
 
-|  示例 | 说明  |
-|--|--|
-| `- (NSSize)cellSize;` | 对 |
-| `- (NSSize)calcCellSize;` | 错 |
-| `- (NSSize)getCellSize;` | 错 |
+  |  示例 | 说明  |
+  |-------|-------|
+  | `- (NSSize)cellSize;` | 对 |
+  | `- (NSSize)calcCellSize;` | 错 |
+  | `- (NSSize)getCellSize;` | 错 |
 
 * 参数要用描述该参数的关键字命名
 
-|  示例 | 说明  |
-|--|--|
-| `- (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;` |对 |
-| `- (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;` | 错 |
+  |  示例 | 说明  |
+  |-------|-------|
+  | `- (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;` |对 |
+  | `- (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;` | 错 |
 
 * 参数前面的单词要能描述该参数。 
 
@@ -39,25 +39,25 @@
 
 * 细化基类中的已有方法:创建一个新方法，其名称是在被细化方法名称后面追加参数关键词
 
-|  示例 | 说明  |
-|--|--|
-|`- (id)initWithFrame:(CGRect)frameRect;` | `NSView`、`UIView` |
-|`- (id)initWithFrame:(NSRect)frameRect mode:(int)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;` | `NSMatrix`， a subclass of `NSView` |
+  |  示例 | 说明  |
+  |-------|-------|
+  |`- (id)initWithFrame:(CGRect)frameRect;` | `NSView`、`UIView` |
+  |`- (id)initWithFrame:(NSRect)frameRect mode:(int)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;` | `NSMatrix`， a subclass of `NSView` |
 
 * 不要使用 and 来连接用属性作参数的关键字
 
-|  示例 | 说明  |
-|--|--|
-| `- (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;` | 对 |
-| `- (int)runModalForDirectory:(NSString *)path andFile:(NSString *)name andTypes:(NSArray *)fileTypes;` | 错 |
+  |  示例 | 说明  |
+  |------ |-------|
+  | `- (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;` | 对 |
+  | `- (int)runModalForDirectory:(NSString *)path andFile:(NSString *)name andTypes:(NSArray *)fileTypes;` | 错 |
 
 虽然上面的例子中使用 add 看起来也不错，但当你方法有太多参数关键字时就有问题。
 
 * 如果方法描述两种独立的行为，使用 and 来串接它们
 
-|  示例 | 说明  |
-|--| --|
-| `- (BOOL)openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;` | `NSWorkspace` |
+  |  示例 | 说明  |
+  |-------| ------|
+  | `- (BOOL)openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;` | `NSWorkspace` |
 
 ## 访问方法
 
@@ -65,74 +65,74 @@
 
 * 如果属性是用名词描述的，则命名格式为:
 
-```
-- (type)noun;
-- (void)setNoun:(type)aNoum;
-```
+  ```
+  - (type)noun;
+  - (void)setNoun:(type)aNoum;
+  ```
 
-例如:
+ 例如:
 
-```objective-c
-- (void)setTitle:(NSString *)aTitle;
-- (NSString *)title;
-```
+  ```objective-c
+  - (void)setTitle:(NSString *)aTitle;
+  - (NSString *)title;
+  ```
 
 * 如果属性是用形容词描述的，则命名格式为: 
 
-```
-- (void)setAdjective:(BOOL)flag;
-- (BOOL)isAdjective;
-```
+  ```
+  - (void)setAdjective:(BOOL)flag;
+  - (BOOL)isAdjective;
+  ```
 
-例如:
+ 例如:
 
-```objective-c
-- (void)setEditable:(BOOL)flag;
-- (BOOL)isEditable;
-```
+  ```objective-c
+  - (void)setEditable:(BOOL)flag;
+  - (BOOL)isEditable;
+  ```
 
 * 如果属性是用动词描述的，则命名格式为:(动词要用现在时时态) 
 
-```
-- (void)setVerbObject:(BOOL)flag;
-- (BOOL)verbObject;
-```
+  ```
+  - (void)setVerbObject:(BOOL)flag;
+  - (BOOL)verbObject;
+  ```
 
-例如:
+ 例如:
 
-```objective-c
-- (void)setShowAlpha:(BOOL)flag; 
-- (BOOL)showsAlpha;
-```
+  ```objective-c
+  - (void)setShowAlpha:(BOOL)flag; 
+  - (BOOL)showsAlpha;
+  ```
 
 * 不要使用动词的过去分词形式作形容词使用
 
-|  示例 | 说明  |
-| -- | -- |
-| `- (void)setAcceptsGlyphInfo:(BOOL)flag;` | 对 |
-| `- (BOOL)acceptsGlyphInfo` | 对 |
-| `- (void)setGlyphInfoAccepted:(BOOL)flag;` | 错|
-| `- (BOOL)glyphInfoAccepted;` | 错 |
+  |  示例 | 说明  |
+  | ----- | ----- |
+  | `- (void)setAcceptsGlyphInfo:(BOOL)flag;` | 对 |
+  | `- (BOOL)acceptsGlyphInfo` | 对 |
+  | `- (void)setGlyphInfoAccepted:(BOOL)flag;` | 错|
+  | `- (BOOL)glyphInfoAccepted;` | 错 |
 
 
 * 可以使用情态动词(can， should， will 等)来提高清晰性，但不要使用 do 或 does
 
-|  示例 | 说明  |
-| -- | -- |
-| `- (void)setCanHide:(BOOL)flag;` | 对 |
-| `- (BOOL)canHide;` | 对 |
-| `- (void)setShouldCloseDocument:(BOOL)flag;` | 对 |
-| `- (void)shouldCloseDocument;` | 对 |
-| `- (void)setDoseAcceptGlyphInfo:(BOOL)flag;` | 错 |
-| `- (BOOL)doseAcceptGlyphInfo;` | 错
+  |  示例 | 说明  |
+  | ----- | ----- |
+  | `- (void)setCanHide:(BOOL)flag;` | 对 |
+  | `- (BOOL)canHide;` | 对 |
+  | `- (void)setShouldCloseDocument:(BOOL)flag;` | 对 |
+  | `- (void)shouldCloseDocument;` | 对 |
+  | `- (void)setDoseAcceptGlyphInfo:(BOOL)flag;` | 错 |
+  | `- (BOOL)doseAcceptGlyphInfo;` | 错
 
 * 只有在方法需要间接返回多个值的情况下，才使用 get
 
-|  示例 | 说明  |
-| -- | -- |
-| `- (void)getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;` |  `NSBezierPath` |
+  |  示例 | 说明  |
+  | ----- | ----- |
+  | `- (void)getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;` |  `NSBezierPath` |
 
-像上面这样的方法，在其实现里应允许接受 NULL 作为其 in/out 参数，以表示调用者对一个或多个返回 值不感兴趣。
+ 像上面这样的方法，在其实现里应允许接受 NULL 作为其 in/out 参数，以表示调用者对一个或多个返回 值不感兴趣。
 
 ## 委托方法
 
@@ -140,35 +140,35 @@
 
 * 名称以标示发送消息的对象的类名开头，省略类名的前缀并小写类第一个字符 
 
-```objective-c
-- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(int)row;
-- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
-```
+  ```objective-c
+  - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(int)row;
+  - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
+  ```
 
 * 冒号紧跟在类名之后(随后的那个参数表示委派的对象)。该规则不适用于只有一个 sender 参数的方法
 
-```objective-c
-- (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
-```
+  ```objective-c
+  - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
+  ```
 
 * 上面的那条规则也不适用于响应通知的方法。在这种情况下，方法的唯一参数表示通知对象
 
-```objective-c
-- (void)windowDidChangeScreen:(NSNotification *)notification;
-```
+  ```objective-c
+  - (void)windowDidChangeScreen:(NSNotification *)notification;
+  ```
 
 * 用于通知委托对象操作即将发生或已经发生的方法名中要使用 did 或 will 
 
-```objective-c
-- (void)browserDidScroll:(NSBrowser *)sender;
-- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window;
-```
+  ```objective-c
+  - (void)browserDidScroll:(NSBrowser *)sender;
+  - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window;
+  ```
 
 * 用于询问委托对象可否执行某操作的方法名中可使用 did 或 will，但最好使用 should 
 
-```objective-c
-- (BOOL)windowShouldClose:(id)sender;
-```
+  ```objective-c
+  - (BOOL)windowShouldClose:(id)sender;
+  ```
 
 ## 集合方法
 
@@ -193,32 +193,32 @@
 * 如果集合中的元素无序，返回 `NSSet`，而不是 `NSArray`
 * 如果将元素插入指定位置的功能很重要，则需具备如下方法:
 
-```objective-c
-- (void)insertElement:(elementType)anObj atIndex:(int)index;
-- (void)removeElementAtIndex:(int)index;
-```
+  ```objective-c
+  - (void)insertElement:(elementType)anObj atIndex:(int)index;
+  - (void)removeElementAtIndex:(int)index;
+  ```
 
 集合方法的实现要考虑如下细节:
 
 * 以上集合类方法通常负责管理元素的所有者关系，在 add 或 insert 的实现代码里会 retain 元素，在 remove 的实现代码中会 release 元素
 * 当被插入的对象需要持有指向集合对象的指针时，通常使用 set... 来命名其设置该指针的方法，且不 要 retain 集合对象。比如上面的 insertLayerManager:atIndex: 这种情形，NSLayoutManager 类使 用如下方法:
 
-```objective-c
-- (void)setTextStorage:(NSTextStorage *)textStorage; 
-- (NSTextStorage *)textStorage;
-```
+  ```objective-c
+  - (void)setTextStorage:(NSTextStorage *)textStorage; 
+  - (NSTextStorage *)textStorage;
+  ```
 
-通常你不会直接调用`setTextStorage:`，而是覆写它。
+ 通常你不会直接调用`setTextStorage:`，而是覆写它。
 
-另一个关于集合约定的例子来自 `NSWindow` 类:
+ 另一个关于集合约定的例子来自 `NSWindow` 类:
 
-```objective-c
-- (void)addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;
-- (void)removeChildWindow:(NSWindow *)childWin;
-- (NSArray *)childWindows;
-- (NSWindow *)parentWindow;
-- (void)setParentWindow:(NSWindow *)window;
-```
+  ```objective-c
+  - (void)addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;
+  - (void)removeChildWindow:(NSWindow *)childWin;
+  - (NSArray *)childWindows;
+  - (NSWindow *)parentWindow;
+  - (void)setParentWindow:(NSWindow *)window;
+  ```
 
 ## 方法参数
 
