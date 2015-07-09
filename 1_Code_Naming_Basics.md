@@ -7,7 +7,7 @@
 * 最好是既清晰又简短，但不要为简短而丧失清晰性
 
 |  示例 | 说明  |
-| -- | -- |
+| ----- | ----- |
 | `insertObject: atIndex:` | 好 |
 | `insert: at:` | 不清晰：要插入什么？“at”表示什么？|
 | `removeObjectAtIndex:` | 好 |
