@@ -27,27 +27,27 @@
 
 - 安装Alcatraz
 
-```
- curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
-```
+	```
+	curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+	```
 
 - 卸载Alcatraz
 
-```
- rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin
- rm -rf ~/Library/Application\ Support/Alcatraz/
-```
+	```
+ 	rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin
+ 	rm -rf ~/Library/Application\ Support/Alcatraz/
+	```
 
 - Xcode升级导致插件不能用
 
-```
-find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID`
-```
+	```
+	find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID`
+	```
 
 Alcatraz里面常用插件说明
 
 | 插件 | 用途 |
-| -- | -- |
+| ---- | ---- |
 | [CocoaPods plugin](https://github.com/kattrali/cocoapods-xcode-plugin) | 为CocoaPods添加了一个菜单项 |
 | [Peckham](https://github.com/markohlebar/Peckham) | 添加引用文件有时候非常麻烦，如果你需要引入一个pod头文件，Xcode自带的自动补全自然帮不了你，这时候你可以用Peckham插件解决这个问题。Command+Control+P解决所有的引入 |
 | [FuzzyAutocomplete](https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin) | 代替Xcode的autocomplete，它利用模式匹配算法来解决问题。 |
