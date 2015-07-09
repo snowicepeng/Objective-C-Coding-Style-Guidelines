@@ -4,7 +4,7 @@
 
 > 注：本文转载自外刊IT评论的翻译。原文是MarkCC的[Stuff Everyone Should Do (part 2): Coding Standards](http://goodmath.scientopia.org/2011/07/14/stuff-everyone-should-do-part-2-coding-standards/)。
 
-我们在Google所做的事情中另外一个让我感到异常有效、有用的制度是严格的编码规范。
+我们在Google所做的事情中一个让我感到异常有效、有用的制度就是严格的编码规范。
 
 在到Google工作之前，我一直认为编码规范没有什么用处。我坚信这些规范都是官僚制度下产生的浪费大家的编程时间、影响人们开发效率的东西。
 
