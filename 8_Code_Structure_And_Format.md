@@ -3,8 +3,10 @@
 实现文件中的代码结构，提倡以下约定：
 
 * 用`#pragma mark -`将函数或方法按功能进行分组。
-* dealloc方法放到实现文件的最顶部。
+* `dealloc`方法放到实现文件的最顶部。  
+	
 	> 这样是为了时刻提醒你要记得释放相关资源。
+
 * delgate或协议相关方法放到一般内容之后。
 
 ```objective-c
@@ -57,7 +59,7 @@
 
 ## 点语法
 
-应该 **始终** 使用点语法来访问或者修改属性，访问其他实例时首选括号。
+应该**始终**使用点语法来访问或者修改属性，访问其他实例时首选括号。
 
 **推荐：**
 
@@ -78,39 +80,40 @@ UIApplication.sharedApplication.delegate;
 * 一个缩进使用 4 个空格，永远不要使用制表符（tab）缩进。请确保在 Xcode 中设置了此偏好。
 * 方法的大括号和其他的大括号（`if`/`else`/`switch`/`while` 等等）始终和声明在同一行开始，在新的一行结束。
 
-**推荐：**
+ **推荐：**
 
-```objective-c
-if (user.isHappy) {
-    // Do something
-} else {
-    // Do something else
-}
-```
+	```objective-c
+	if (user.isHappy) {
+	    // Do something
+	} else {
+  	  // Do something else
+	}
+	```
 
 * 申明文件中属性在上面，方法在下面，属性和方法之间空一行。（如果方法有注释，注释算方法的一部分，则方法之间空一行）   
-    > 注意各个要素之间的空格与空行
 
-```objective-c
-@interface NYTPerson : NSObject <NSCoding, NSCopying>
+	> 注意各个要素之间的空格与空行
 
-@property (copy, nonatomic) NSString *name;
-@property (strong, nonatomic) NSArray *children;
+	```objective-c
+	@interface NYTPerson : NSObject <NSCoding, NSCopying>
 
-- (instancetype)initWithName:(NSString *)name;
-- (void)sayHello;
+	@property (copy, nonatomic) NSString *name;
+	@property (strong, nonatomic) NSArray *children;
 
-/**
- *  通过名字，返回对应的孩子.
- *
- *  @param name 孩子的名字.
- *
- *  @return 返回孩子对象，如果没有孩子这个名字，返回nil.
- */
-- (NYTPerson *)childWithName:(NSString *)name;
+	- (instancetype)initWithName:(NSString *)name;
+	- (void)sayHello;
 
-@end
-```
+	/**
+	 *  通过名字，返回对应的孩子.
+	 *
+ 	 *  @param name 孩子的名字.
+	 *
+ 	 *  @return 返回孩子对象，如果没有孩子这个名字，返回nil.
+ 	 */
+	- (NYTPerson *)childWithName:(NSString *)name;
+
+	@end
+	```
 
 * 实现文件中方法之间应该正好空一行，这有助于视觉清晰度和代码组织性。在方法中的功能块之间应该使用空白分开，但往往可能应该创建一个新的方法。
 * `@synthesize` 和 `@dynamic` 在实现中每个都应该占一个新行。
@@ -119,10 +122,13 @@ if (user.isHappy) {
 
 * 每行代码的长度最多不超过100个字符
 * 尝试将单个函数或方法的实现代码控制在30行内
+
     > 如果某个函数或方法的实现代码过长，可以考量下是否可以将代码拆分成几个小的拥有单一功能的方法。
     >
 	> 30行是在13寸macbook上XCode用14号字体时，恰好可以让一个函数的代码做到整屏完全显示的行数。
+
 * 将单个实现文件里的代码行数控制在500～600行内
+
 	> 为了简洁和便于阅读，建议将单个实现文件的代码行数控制在500～600行以内最好。
 	> 
 	> 当接近或超过800行时，就应当开始考虑分割实现文件了。
@@ -204,35 +210,35 @@ if (error) {
 
 * 在方法签名中，在 -/+ 符号后应该有一个空格。方法片段之间也应该有一个空格。
 
-**推荐：**
+ **推荐：**
 
-```objective-c
-- (void)setExampleText:(NSString *)text image:(UIImage *)image;
-```
+	```objective-c
+	- (void)setExampleText:(NSString *)text image:(UIImage *)image;
+	```
 
 * 实现文件中，方法的左花括号不另起一行，和方法名同行，并且和方法名之间保持1个空格
 	> 此条是为了和 Xcode 模板生成的文件的代码风格保持一致。
 
-```objective-c
-//赞成的
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+	```objective-c
+	//赞成的
+	- (void)didReceiveMemoryWarning {
+    	[super didReceiveMemoryWarning];
+    	// Dispose of any resources that can be recreated.
+	}
 
-//不赞成的
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-```
+	//不赞成的
+	- (void)didReceiveMemoryWarning
+	{
+    	[super didReceiveMemoryWarning];
+    	// Dispose of any resources that can be recreated.
+	}
+	```
 
 ## 变量
 
 变量名应该尽可能命名为描述性的。除了 `for()` 循环外，其他情况都应该避免使用单字母的变量名。
 星号表示指针属于变量，例如：`NSString *text` 不要写成 `NSString* text` 或者 `NSString * text` ，常量除外。
-尽量定义属性来代替直接使用实例变量。除了初始化方法（`init`， `initWithCoder:`，等）， `dealloc` 方法和自定义的 setters 和 getters 内部，应避免直接访问实例变量。更多有关在初始化方法和 dealloc 方法中使用访问器方法的信息，参见[这里](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)。
+尽量定义属性来代替直接使用实例变量。除了初始化方法（`init`， `initWithCoder:`，等）， `dealloc` 方法和自定义的 setters 和 getters 内部，应避免直接访问实例变量。更多有关在初始化方法和 `dealloc` 方法中使用访问器方法的信息，参见[这里](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)。
 
 
 **推荐：**
@@ -256,7 +262,7 @@ if (error) {
 
 ### 变量限定符
 
-当涉及到[在 ARC 中被引入](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4))变量限定符时，
+当涉及到[在 ARC 中被引入](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4)变量限定符时，
 限定符 (`__strong`, `__weak`, `__unsafe_unretained`, `__autoreleasing`) 应该位于星号和变量名之间，如：`NSString * __weak text`。
 
 `__block`位于变量前面 `__block NSInteger count;`。
