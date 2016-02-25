@@ -44,7 +44,7 @@
         > Views
         > Models
         > Utils
-    >
+    ...
     > Pods
     > [Supporting Files]
         Module1.xcassets
