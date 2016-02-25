@@ -26,3 +26,29 @@
         > Files                 项目中使用到的文件（如配置文件、本地页面、SSL证书等）
         > Images                不适合用 Image Sets 管理的图片（如全屏背景图等）
 ```
+
+如果项目比较大，可以按照模块来划分目录：
+
+```
+> [ProjectName]
+    AppDelegate.h
+    AppDelegate.m
+    Main.storyboard
+    > Module1
+        > ViewControllers
+        > Views
+        > Models
+        > Utils
+    > Module2
+        > ViewControllers
+        > Views
+        > Models
+        > Utils
+    >
+    > Pods
+    > [Supporting Files]
+        Module1.xcassets
+        Module2.xcassets
+        > Files
+        > Images
+```
