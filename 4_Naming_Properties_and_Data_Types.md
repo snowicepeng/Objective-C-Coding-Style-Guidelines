@@ -68,6 +68,15 @@
       NSResizableWindowMask       = 1 << 3
   };
   ```
+  
+* 大部分情况下，推荐使用Cocoa风格的枚举风格：
+
+```objective-c
+typedef NS_ENUM(NSInteger, UITableViewStyle) {
+    UITableViewStylePlain,
+    UITableViewStyleGrouped
+};
+```
 
 ### const常量
 
