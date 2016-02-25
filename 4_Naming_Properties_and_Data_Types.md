@@ -59,7 +59,7 @@
 
 * 位掩码常量可以使用不具名枚举。如:
 
-  ```objective-c
+   ```objective-c
   enum {
       NSBorderlessWindowMask      = 0，
       NSTitledWindowMask          = 1 << 0，
@@ -71,12 +71,12 @@
   
 * 大部分情况下，推荐使用Cocoa风格的枚举风格：
 
-```objective-c
-typedef NS_ENUM(NSInteger, UITableViewStyle) {
-    UITableViewStylePlain,
-    UITableViewStyleGrouped
-};
-```
+   ```objective-c
+   typedef NS_ENUM(NSInteger, UITableViewStyle) {
+       UITableViewStylePlain,
+       UITableViewStyleGrouped
+   };
+   ```
 
 ### const常量
 
