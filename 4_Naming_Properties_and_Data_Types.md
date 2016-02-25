@@ -69,7 +69,7 @@
   };
   ```
   
-* 大部分情况下，推荐使用Cocoa风格的枚举风格：
+* 大部分情况下，推荐使用Cocoa风格的枚举定义：
 
    ```objective-c
    typedef NS_ENUM(NSInteger, UITableViewStyle) {
