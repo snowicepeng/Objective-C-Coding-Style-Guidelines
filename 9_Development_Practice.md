@@ -201,3 +201,82 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 		}
 	}
 	```
+
+## Nullability
+
+> 应该应用在Xcode6.3+开发的Objective-C项目中。
+
+该特性的引入其实更多的是为了配合 Swift中的 Optional 类型，不过对于 Objective-C 本身来说能够加强语意也为编译器代码检查提供了依据，所以还是有必要的。
+
+```objective-c
+NS_ASSUME_NONNULL_BEGIN
+@property(null_resettable, nonatomic,strong) UIView *view;
+@property(nullable, nonatomic, readonly, copy) NSString *nibName;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;
+NS_ASSUME_NONNULL_END
+```
+
+其中`NS_ASSUME_NONNULL_BEGIN` 和 `NS_ASSUME_NONNULL_END` 这对宏之间的代码都默认为所有的变量、属性、参数等都是`nonnull`（或`__nonnull`）类型，因为大多数情况下如此。如果某个值可以为null，只需要单独用`nullable`（或`__nullable`）标记即可。
+
+## 泛型
+
+Objective-C并不是一种泛型语言，不过借助于编译器 Xcode7+ 能够部分支持泛型的特性，可以有效的避免一些类型转换问题及出错几率。
+
+### 带泛型的容器
+
+```objective-c
+NSArray<NSString *> *strings = @[ @"Objective-C", @"Swift" ];
+NSDictionary<NSString *, NSNumber *> *dict = @{ @"weight": @55, @"height": @175 };
+
+@property (nonatomic, readonly) NSArray<NSURL *> *imageURLs;
+```
+
+在容器中使用泛型的好处就是编译器能够知道容器里面的对象的类型，方便直接获取容器对象的属性，同时也能避免将错误的对象类型传入容器。
+
+### 自定义泛型类
+
+```
+@interface Stack<T> : NSObject
+@property (nonatomic, readonly) NSArray<T> *allObjects;
+- (void)pushObject:(T)object;
+- (T)pooObject;
+@end
+```
+
+指定泛型类型后，不同两种类型之间是不能强转的（通常转换也是父类与子类之间的相互转换），如果希望能够转换，需要加入修饰关键字：
+- `__covariant`：申明子类型可以强转为父类型；
+- `__contravariant`：申明父类可以强转为子类型
+
+```objective-c
+@interface Stack<__covariant T> : NSObject
+@end
+
+Stack<NSString *> *stringStack;
+Stack<NSMutableString *> *mutableStringStack;
+
+//则：
+stringStack = mutableStringStack;
+```
+
+```objective-c
+@interface Stack<__contravariant T> : NSObject
+@end
+
+Stack<NSString *> *stringStack;
+Stack<NSMutableString *> *mutableStringStack;
+
+//则：
+mutableStringStack = stringStack;
+```
+
+## `__kindof`
+
+`__kindof`可以修饰类型为某个类或其子类的变量。
+
+```objective-c
+- (__kindof UITableViewCell *)dequeueReuseableCellWithIdentifier:(NSString *)identifier;
+```
+
+```objective-c
+@property (nonatomic, readonly, copy) NSArray<__kindof UIView *> *subviews;
+```
